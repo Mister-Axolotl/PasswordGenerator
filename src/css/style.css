@@ -1,0 +1,92 @@
+* {
+    margin: 0;
+    padding: 0;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;    
+}
+
+body {
+    background: linear-gradient(to right,#393E46,#222831);
+}
+
+.main-app {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    user-select: none;
+}
+
+nav {
+    width: 100vw;
+    height: 62px;
+    display: flex; /*Met les éléments sur la même ligne*/
+    justify-content: space-between; /*Rajoute de l'espace entre les éléments*/
+    align-items: center; /*Met au milieu de la barre*/
+    color: white;
+    background-color: #222;
+    -webkit-app-region: drag;
+}
+
+#logo {
+    margin-left: 3mm;
+    margin-top: 2mm;
+    width: 5mm;
+}
+
+.title {
+    display: contents; 
+    margin-bottom: 5px;   
+}
+
+.nav-link {
+    -webkit-app-region: no-drag;
+    padding: 17px;
+    cursor: pointer;
+    font-size: 1.3rem;
+}
+
+.nav-link:hover {
+    background-color: #4A47A3;
+    color: #222;
+}
+
+#close-app:hover {
+    background-color: rgb(255, 74, 74);
+    color: #222;
+}
+
+.mainApp > .contentArea {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    height: 100%;
+}
+
+/* Generate Password Button */
+
+#generatePasswordBtn {
+    justify-content: center;
+    background-color: #4CAF50;
+    border: none; /* Faire en sorte qu'il n'y a aucune bordure */
+    border-radius: 10px;
+    color: white;
+    padding: 15px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    position: fixed;
+    bottom: 0;
+    width: 50%;
+    margin-left: 25%;
+    margin-bottom: 2%;
+}
+
+#generatePasswordBtn:hover {
+    background-color: #1dee85; /* Green */
+    cursor: pointer;
+}
