@@ -48,3 +48,11 @@ generatePasswordBtn.addEventListener('click', () =>{
 	generatePassword(10);
 });
 
+//============================== Options Button ==============================
+
+/*const optionsBtn = document.getElementById("parameters-page");
+
+optionsBtn.addEventListener('click', () =>{
+    const win = new BrowserWindow({ backgroundColor: '#2e2c29' })
+    win.loadURL('https://github.com') 
+});*/

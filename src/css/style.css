@@ -22,7 +22,7 @@ body {
 
 nav {
     width: 100vw;
-    height: 62px;
+    height: 60px;
     display: flex; /*Met les éléments sur la même ligne*/
     justify-content: space-between; /*Rajoute de l'espace entre les éléments*/
     align-items: center; /*Met au milieu de la barre*/
@@ -31,15 +31,16 @@ nav {
     -webkit-app-region: drag;
 }
 
-#logo {
+/*#logo {
     margin-left: 3mm;
     margin-top: 2mm;
     width: 5mm;
-}
+}*/
 
 .title {
     display: contents; 
-    margin-bottom: 5px;   
+    margin-bottom: 5px;
+    margin-left: 3mm;
 }
 
 .nav-link {
@@ -87,6 +88,29 @@ nav {
 }
 
 #generatePasswordBtn:hover {
-    background-color: #1dee85; /* Green */
+    background-color: #1dee85;
     cursor: pointer;
+}
+
+/* Articles */
+
+.mainPage > h1,
+.day-forecast {
+    margin: 0.5rem;
+    padding: 0.3rem;
+    font-size: 1.2rem;
+}
+
+.day-forecast {
+    background: right/contain content-box border-box no-repeat url('/media/examples/rain.svg') white;
+}
+
+.day-forecast > h2,
+.day-forecast > p {
+    margin: 0.2rem;
+    font-size: 1rem;
+}
+
+textarea {
+    resize: none;
 }
