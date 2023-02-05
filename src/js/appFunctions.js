@@ -32,20 +32,37 @@ closeBtn.addEventListener('click', () =>{
 
 //============================== Generate Password Button ==============================
 
-const generatePasswordBtn = document.getElementById("generatePasswordBtn");
+var generatePasswordBtn = document.querySelector("#generatePasswordBtn");
+var password = document.querySelector("#password");
+var checkBoxNumbers = document.querySelector("#numbers");
+var checkBoxLowercaseLetters = document.querySelector("#lowercase-letters");
+var checkBoxCapitalLetters = document.querySelector("#capital-letters");
+var passwordLength = document.querySelector("#length");
 
 function generatePassword(length) {
 	var result = []; 
-	var characters = `ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789&#@`;
-	var charactersLength = characters.length; 
-	for ( var i = 0; i < length; i++ ) { 
-		result.push(characters.charAt(Math.floor(Math.random() * charactersLength))); 
-	}
-	return alert(result.join(''));
+	var characters = [];
+    if(passwordLength.value <= 1000) {
+        if(checkBoxNumbers.checked === true){
+            characters.push('0','1','2','3','4','5','6','7','8','9');
+        }
+        if(checkBoxLowercaseLetters.checked === true){
+            characters.push('a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z');
+        }
+        if(checkBoxCapitalLetters.checked === true){
+            characters.push('A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z');
+        }
+        for ( var i = 0; i < length; i++ ) { 
+            result.push(characters.at(Math.floor(Math.random() * characters.length))); 
+        }
+        return password.value = result.join('');
+    } else {
+        return password.value = 'Number is too big! Maximum is 1000.'
+    }
 }
 
 generatePasswordBtn.addEventListener('click', () =>{
-	generatePassword(10);
+	generatePassword(passwordLength.value);
 });
 
 //============================== Options Button ==============================

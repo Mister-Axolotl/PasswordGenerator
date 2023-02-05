@@ -18,7 +18,7 @@ function createWindow () {
         }
     })
 
-  win.loadFile('src/index.html')
+  win.loadFile('src/pages/index.html')
 
   //Minimize
   ipc.on('minimizeApp', () => {

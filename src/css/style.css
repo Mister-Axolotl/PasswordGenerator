@@ -31,11 +31,11 @@ nav {
     -webkit-app-region: drag;
 }
 
-/*#logo {
+#logo {
     margin-left: 3mm;
     margin-top: 2mm;
     width: 5mm;
-}*/
+}
 
 .title {
     display: contents; 
@@ -48,6 +48,10 @@ nav {
     padding: 17px;
     cursor: pointer;
     font-size: 1.3rem;
+}
+
+#parameters-page {
+    color: #1dee85;
 }
 
 .nav-link:hover {
@@ -72,7 +76,7 @@ nav {
 #generatePasswordBtn {
     justify-content: center;
     background-color: #4CAF50;
-    border: none; /* Faire en sorte qu'il n'y a aucune bordure */
+    border: none;
     border-radius: 10px;
     color: white;
     padding: 15px;
@@ -95,22 +99,36 @@ nav {
 /* Articles */
 
 .mainPage > h1,
-.day-forecast {
+.password-options {
     margin: 0.5rem;
     padding: 0.3rem;
     font-size: 1.2rem;
+    border-radius: 5px;
 }
 
-.day-forecast {
-    background: right/contain content-box border-box no-repeat url('/media/examples/rain.svg') white;
+.password-options {
+    background: linear-gradient(to right,#7296d1,#1dee85);
 }
 
-.day-forecast > h2,
-.day-forecast > p {
+.password-options > h2, .password-options > p {
     margin: 0.2rem;
-    font-size: 1rem;
+    font-size: 1.5rem;
 }
 
+.password-options > img {
+    background-repeat: no-repeat;
+    width: 20px;
+    padding-top: 11px;
+    padding-right: 5px;
+}
+
+a, img {
+    -webkit-user-drag: none;
+}
 textarea {
     resize: none;
+}
+
+#password, #length { 
+    width: 99.4%;
 }

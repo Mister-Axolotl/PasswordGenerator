@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>PasswordGenerator</title>
+        <link rel="stylesheet" href="../css/style.css">
+        <link rel="stylesheet" href="../css/switch.css">
+        <script defer src="../js/appFunctions.js"></script>
+    </head>
+    <body>
+        <div class="main-app">
+            <nav>
+                <div class="left-nav">
+                    <img id="logo" src="../images/password.png" alt="">
+                    <div class="title">Password Generator</div>
+                </div>
+                <div class="right-nav">
+                    <a href="./options.html"><span class="nav-link" id="parameters-page" title="Paramètres">Options</span></span></a>
+                    <span class="nav-link" id="minimize-app" title="Réduire">&minus;</span>
+                    <span class="nav-link" id="maximize-app" title="Agrandir">🗖</span>
+                    <span class="nav-link" id="close-app" title="Fermer">&#10006;</span>
+                </div>
+            </nav>
+            <div class="mainPage">
+                <div class="container">
+                    <article class="password-options">
+                        <img src="../images/arrow-right.png" style="float:left;"/>
+                        <h2>Options:</h2>
+                        <!-- <div>
+                            <input type="checkbox" id="numbers" name="numbers" checked>
+                            <label for="lowercase-letters">With numbers</label>
+                        </div> -->
+
+                        <label class="switch">
+                            <input type="checkbox" id="numbers" checked>
+                            <span class="slider round"></span>
+                            <p>With numbers</p>
+                        </label>
+
+                        <div>
+                            <input type="checkbox" id="lowercase-letters" name="lowercase-letters" checked>
+                            <label for="lowercase-letters">With lowercase letters</label>
+                        </div>
+                        <div>
+                            <input type="checkbox" id="capital-letters" name="capital-letters" checked>
+                            <label for="capital-letters">With capital letters</label>
+                        </div>
+                    </article>
+                    <article class="password-options">
+                        <img src="../images/arrow-right.png" style="float:left;" />
+                        <h2>Characters length:</h2>
+                        <input type="number" id="length" name="length" min="1" max="1000" value="16">
+                    </article>
+                    <article class="password-options">
+                        <img src="../images/arrow-right.png" style="float:left;" />
+                        <h2>Your password:</h2>
+                        <input type="text" id="password" name="password" readonly>
+                    </article>
+                </div>
+                <button id="generatePasswordBtn">Generate Password</button> 
+            </div>
+            
+    </body>
+</html>
