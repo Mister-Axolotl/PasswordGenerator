@@ -4,9 +4,9 @@
     "height": 560
   },
   "checkboxes": {
-    "number": false,
-    "lowercase": false,
-    "capitalLetters": false,
-    "specialCharacters": false
+    "numbers": true,
+    "lowercase": true,
+    "capitalLetters": true,
+    "specialCharacters": true
   }
 }

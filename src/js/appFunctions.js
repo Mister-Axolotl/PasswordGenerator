@@ -1,6 +1,7 @@
 const { ipcRenderer } = require('electron');
 const ipc = ipcRenderer;
 const fs = require("fs");
+
 //============================== Head Buttons ==============================
 
 const minimizeBtn = document.getElementById("minimize-app");
@@ -39,6 +40,13 @@ var checkBoxLowercaseLetters = document.querySelector("#lowercase-letters");
 var checkBoxCapitalLetters = document.querySelector("#capital-letters");
 var checkboxSpecialLetters = document.querySelector("#special-letters");
 var passwordLength = document.querySelector("#length");
+
+let dt = fs.readFileSync("src/user-preferences.json");
+let data = JSON.parse(dt);
+checkBoxNumbers.checked = data.checkboxes.numbers;
+checkBoxLowercaseLetters.checked = data.checkboxes.lowercase;
+checkBoxCapitalLetters.checked = data.checkboxes.capitalLetters;
+checkboxSpecialLetters.checked = data.checkboxes.specialCharacters;
 
 function generatePassword(length) {
 	var result = []; 
@@ -83,15 +91,23 @@ passwordLength.addEventListener("wheel", function(event) {
     }
 });
 
-const copyButton = document.querySelector("#copy");
-const message = document.getElementById("message");
+var copyButton = document.querySelector("#copy");
+var message = document.getElementById("message");
+var messageFail = document.getElementById("messageFail");
 
 copyButton.addEventListener("click", () => {
-    navigator.clipboard.writeText(password.value);
-    message.style.display = "contents";
-      setTimeout(function() {
-        message.style.display = "none";
-      }, 700);
+    if(password.value != ""){
+        navigator.clipboard.writeText(password.value);
+        message.style.display = "contents";
+          setTimeout(function() {
+            message.style.display = "none";
+          }, 700);
+    } else {
+        messageFail.style.display = "contents";
+          setTimeout(function() {
+            messageFail.style.display = "none";
+          }, 700);
+    }
 });
 
 checkBoxNumbers.addEventListener("click", () => {
@@ -129,10 +145,3 @@ checkboxSpecialLetters.addEventListener("click", () => {
     var json = JSON.stringify(data, null, 2);
     fs.writeFile("src/user-preferences.json", json, "utf8", (err) => { if (err) console.log(err); });
 });
-
-let dt = fs.readFileSync("src/user-preferences.json");
-let data = JSON.parse(dt);
-checkBoxNumbers.checked = data.checkboxes.numbers;
-checkBoxLowercaseLetters.checked = data.checkboxes.lowercase;
-checkBoxCapitalLetters.checked = data.checkboxes.capitalLetters;
-checkboxSpecialLetters.checked = data.checkboxes.specialCharacters;
