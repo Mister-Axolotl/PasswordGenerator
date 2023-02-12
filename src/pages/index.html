@@ -45,16 +45,22 @@
                             <input type="checkbox" id="capital-letters" name="capital-letters" checked>
                             <label for="capital-letters">With capital letters</label>
                         </div>
+                        <div>
+                            <input type="checkbox" id="special-letters" name="special-letters" checked>
+                            <label for="special-letters">With special characters</label>
+                        </div>
                     </article>
                     <article class="password-options">
-                        <img src="../images/arrow-right.png" style="float:left;" />
+                        <img src="../images/arrow-right.png" style="float:left;"/>
                         <h2>Characters length:</h2>
                         <input type="number" id="length" name="length" min="1" max="1000" value="16">
                     </article>
                     <article class="password-options">
-                        <img src="../images/arrow-right.png" style="float:left;" />
+                        <img src="../images/arrow-right.png" style="float:left;"/>
                         <h2>Your password:</h2>
                         <input type="text" id="password" name="password" readonly>
+                        <button id="copy"><img src="../images/copy-two-paper-sheets-interface-symbol.png" style="float:right;"/>Copy</button>
+                        <p id="message" style="display: none;">Password copied!</p>
                     </article>
                 </div>
                 <button id="generatePasswordBtn">Generate Password</button> 

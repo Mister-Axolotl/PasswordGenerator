@@ -1,0 +1,12 @@
+{
+  "windowBounds": {
+    "width": 1240,
+    "height": 560
+  },
+  "checkboxes": {
+    "number": false,
+    "lowercase": false,
+    "capitalLetters": false,
+    "specialCharacters": false
+  }
+}

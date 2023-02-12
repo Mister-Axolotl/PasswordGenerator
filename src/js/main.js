@@ -1,11 +1,13 @@
-const { app, BrowserWindow, ipcMain } = require('electron')
-const path = require('path')
-const ipc = ipcMain
+const { app, BrowserWindow, ipcMain } = require('electron');
+const path = require('path');
+const ipc = ipcMain;
+const fs = require("fs");
+let mainWindow;
 
-function createWindow () {
-    const win = new BrowserWindow({
-    width: 1200,
-    height: 600,
+function createWindow(user_width, user_height) {
+    mainWindow = new BrowserWindow({
+    width: user_width,
+    height: user_height,
     minWidth: 940,
     minHeight: 560,
     icon: './src/images/password.png',
@@ -16,48 +18,71 @@ function createWindow () {
             devTools: true,
             preload: path.join(__dirname, 'preload.js')
         }
-    })
+    });
 
-  win.loadFile('src/pages/index.html')
+  mainWindow.loadFile('src/pages/index.html');
 
-  //Minimize
+  // Minimize
   ipc.on('minimizeApp', () => {
-    win.minimize()
-  })
+    mainWindow.minimize()
+  });
 
-  //Maximize
+  // Maximize
   ipc.on('maximizeRestoreApp', () => {
-    if(win.isMaximized()){
-        win.restore()   
+    if(mainWindow.isMaximized()){
+        mainWindow.restore()   
     } else {
-        win.maximize()
+        mainWindow.maximize()
     }
-  })
-  win.on('maximize', () => {
-    win.webContents.send('isMaximized')
-  })
-  win.on('unmaximize', () => {
-    win.webContents.send('isRestored')
-  })
+  });
+  mainWindow.on('maximize', () => {
+    mainWindow.webContents.send('isMaximized')
+  });
+  mainWindow.on('unmaximize', () => {
+    mainWindow.webContents.send('isRestored')
+  });
 
-  //Close
+  // Close
   ipc.on('closeApp', () => {
-    win.close()
-  })
+    mainWindow.close()
+  });
 }
 
 app.whenReady().then(() => {
-  createWindow()
 
-  app.on('activate', () => {
-    if (BrowserWindow.getAllWindows().length === 0) {
-      createWindow()
+    app.on("activate", function () {
+      if (BrowserWindow.getAllWindows().length == 0) createWindow();
+    });
+
+    // Read the data
+    let res = fs.existsSync("src/user-preferences.json");
+    if(res) {
+      let dt = fs.readFileSync("src/user-preferences.json");
+      let data = JSON.parse(dt);
+      let width = data.windowBounds.width;
+      let height = data.windowBounds.height;
+      createWindow(width, height)
+      
+      
+      // var checkBoxLowercaseLetters = document.querySelector("#lowercase-letters");
+      // var checkBoxCapitalLetters = document.querySelector("#capital-letters");
+      // var checkboxSpecialLetters = document.querySelector("#special-letters");
     }
-  })
-})
 
-app.on('window-all-closed', () => {
-  if (process.platform !== 'darwin') {
+    mainWindow.on('resize', () => {
+      let { width, height } = mainWindow.getBounds();
+      let dt = fs.readFileSync("src/user-preferences.json");
+      let data = JSON.parse(dt);
+      data.windowBounds.width = width;
+      data.windowBounds.height = height;
+      var json = JSON.stringify(data, null, 2);
+      fs.writeFile("src/user-preferences.json", json, "utf8", (err) => { if (err) console.log(err); });
+    })
+});
+
+
+app.on('mainWindowdow-all-closed', () => {
+  if (process.platform !== 'darmainWindow') {
     app.quit()
   }
-})
+});

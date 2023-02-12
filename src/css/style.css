@@ -96,6 +96,12 @@ nav {
     cursor: pointer;
 }
 
+#generatePasswordBtn:active {
+    background-color: #20c372;
+    box-shadow: 0 0px 10px #000000;
+    transform: translateY(4px);
+}
+
 /* Articles */
 
 .mainPage > h1,
@@ -124,6 +130,7 @@ nav {
 
 a, img {
     -webkit-user-drag: none;
+    text-decoration: none;
 }
 textarea {
     resize: none;
@@ -131,4 +138,37 @@ textarea {
 
 #password, #length { 
     width: 99.4%;
+    outline: none;
+}
+
+#message {
+    background-image: url("../images/copy-two-paper-sheets-interface-symbol.png");
+}
+
+#copy {
+    background-color: #4fb0e4;
+    border: none;
+    border-radius: 10px;
+    color: white;
+    padding: 10px;
+    text-decoration: none;
+    font-size: 16px;
+    margin-left: 45%;
+    margin-top: 5px;
+}
+
+#copy > img {
+    width: 5mm;
+    margin-left: 5px;
+}
+
+#copy:hover {
+    background-color: #4c8caf;
+    cursor: pointer;
+}
+
+#copy:active {
+    background-color: #00c0eb;
+    box-shadow: 0 0px 10px #000000;
+    transform: translateY(2px);
 }
