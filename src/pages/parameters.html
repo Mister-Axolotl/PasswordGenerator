@@ -6,6 +6,7 @@
         <link rel="stylesheet" href="../css/style.css">
         <link rel="stylesheet" href="../css/switchLanguages.css">
         <script defer src="../js/appFunctions.js"></script>
+        <script defer src="../js/parameters.js"></script>
     </head>
     <body>
         <div class="main-app">
@@ -34,21 +35,18 @@
                 </div>
             </nav>
             <div class="mainPage">
-                <!-- <h1>Weather forecast for Seattle</h1>
-                <article class="day-forecast">
-                    <h2>03 March 2018</h2>
-                    <p>Rain.</p>
-                </article>
-                <article class="day-forecast">
-                    <h2>04 March 2018</h2>
-                    <p>Periods of rain.</p>
-                </article>
-                <article class="day-forecast">
-                    <h2>05 March 2018</h2>
-                    <p>Heavy rain.</p>
-                    <textarea id="story" name="story"rows="5" cols="33">It was a dark and stormy night...</textarea>
-                </article>-->
-                
+                <div class="container">
+                    <article class="password-options">
+                        <img src="../images/arrow-right.png" style="float:left;"/>
+                        <h2>App parameters:</h2>
+                        <div id="colors">
+                            <label for="head" id="textColor">Backgroud gradient:</label>
+                            <input type="color" id="color1" name="head">
+                            <input type="color" id="color2" name="head"value="#222831">
+                            <button id="reset-color">Reset color</button>
+                        </div>
+                    </article>
+                </div>
             </div>
             
     </body>

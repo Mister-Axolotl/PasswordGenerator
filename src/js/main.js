@@ -61,12 +61,7 @@ app.whenReady().then(() => {
       let data = JSON.parse(dt);
       let width = data.windowBounds.width;
       let height = data.windowBounds.height;
-      createWindow(width, height)
-      
-      
-      // var checkBoxLowercaseLetters = document.querySelector("#lowercase-letters");
-      // var checkBoxCapitalLetters = document.querySelector("#capital-letters");
-      // var checkboxSpecialLetters = document.querySelector("#special-letters");
+      createWindow(width, height);
     }
 
     mainWindow.on('resize', () => {
