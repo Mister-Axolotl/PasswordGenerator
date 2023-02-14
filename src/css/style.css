@@ -18,7 +18,7 @@
 
 nav {
     width: 100vw;
-    height: 61px;
+    height: 60px;
     display: flex; /*Met les éléments sur la même ligne*/
     justify-content: space-between; /*Rajoute de l'espace entre les éléments*/
     align-items: center; /*Met au milieu de la barre*/
@@ -186,11 +186,9 @@ textarea {
     border-radius: 10px;
     color: white;
     padding: 10px;
-    text-align: center;
-    text-decoration: none;
-    display: inline-block;
     font-size: 16px;
     width: 100px;
+    margin-left: 25%;
 }
 
 #reset-color:hover {
@@ -224,5 +222,6 @@ input[type="color"] {
 }
 
 #textColor {
-    margin-top: 9px;
+    margin-top: 10px;
+    margin-right: 10px;
 }

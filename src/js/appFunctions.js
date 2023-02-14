@@ -5,11 +5,13 @@ const minimizeBtn = document.getElementById("minimize-app");
 const maxResBtn = document.getElementById("maximize-app");
 const closeBtn = document.getElementById("close-app");
 
-function changeMaxResBtn(isMaximizedApp){
-    if(isMaximizedApp){
-        maxResBtn.title = 'Rétrécir';
+function changeMaxResBtn(){
+    let dt = fs.readFileSync("src/user-preferences.json");
+    let data = JSON.parse(dt);
+    if(data.windowBounds.isMaximized){
+        maxResBtn.title = 'Maximize';
     } else {
-        maxResBtn.title = 'Agrandir';
+        maxResBtn.title = 'Minimize';
     }
 }
 
@@ -18,10 +20,12 @@ ipc.on('isRestored', () => { changeMaxResBtn(false) });
 
 minimizeBtn.addEventListener('click', () =>{
     ipc.send('minimizeApp');
+    changeMaxResBtn();
 });
 
 maxResBtn.addEventListener('click', () =>{
     ipc.send('maximizeRestoreApp');
+    // changeMaxResBtn();
 });
 
 closeBtn.addEventListener('click', () =>{

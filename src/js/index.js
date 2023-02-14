@@ -44,7 +44,14 @@ function generatePassword(length) {
         if(checkBoxNumbers.checked === false && checkBoxLowercaseLetters.checked === false && checkBoxCapitalLetters.checked === false && checkboxSpecialLetters.checked === false){
             password.style.color = "red";
             return password.value = 'You must check something!';
-        } else return password.value = result.join('');
+        } else {
+            let dt = fs.readFileSync("src/user-preferences.json");
+            let data = JSON.parse(dt);
+            data.others.passwordGenerated = data.others.passwordGenerated + 1;
+            var json = JSON.stringify(data, null, 2);
+            fs.writeFile("src/user-preferences.json", json, "utf8", (err) => { if (err) console.log(err); });
+            return password.value = result.join('');
+        }
     } else if(passwordLength.value > 1000) {
         password.style.color = "red";
         return password.value = 'Number is too big! Maximum is 1000.'  

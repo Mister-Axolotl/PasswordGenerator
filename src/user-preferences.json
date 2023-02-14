@@ -1,16 +1,18 @@
 {
   "windowBounds": {
-    "width": 1140,
-    "height": 616
+    "width": 1200,
+    "height": 600,
+    "isMaximized": false
   },
   "checkboxes": {
     "numbers": true,
     "lowercase": true,
     "capitalLetters": true,
-    "specialCharacters": true
+    "specialCharacters": false
   },
   "others": {
-    "passwordLength": "28"
+    "passwordLength": "26",
+    "passwordGenerated": 4
   },
   "appColors": {
     "backgroundColor1": "#393E46",
