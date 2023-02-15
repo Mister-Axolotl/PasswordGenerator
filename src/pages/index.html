@@ -6,6 +6,7 @@
         <link rel="stylesheet" href="../css/style.css">
         <link rel="stylesheet" href="../css/switch.css">
         <script defer src="../js/appFunctions.js"></script>
+        <script defer src="../js/index.js"></script>
     </head>
     <body>
         <div class="main-app">
@@ -15,10 +16,10 @@
                     <div class="title">Password Generator</div>
                 </div>
                 <div class="right-nav">
-                    <a href="./options.html"><span class="nav-link" id="parameters-page" title="Paramètres">Options</span></span></a>
-                    <span class="nav-link" id="minimize-app" title="Réduire">&minus;</span>
-                    <span class="nav-link" id="maximize-app" title="Agrandir">🗖</span>
-                    <span class="nav-link" id="close-app" title="Fermer">&#10006;</span>
+                    <a href="./parameters.html"><span class="nav-link" id="parameters-page" title="Parameters">Options</span></span></a>
+                    <span class="nav-link" id="minimize-app" title="Minimize">&minus;</span>
+                    <span class="nav-link" id="maximize-app" title="Maximize">🗖</span>
+                    <span class="nav-link" id="close-app" title="Close">&#10006;</span>
                 </div>
             </nav>
             <div class="mainPage">
@@ -26,17 +27,11 @@
                     <article class="password-options">
                         <img src="../images/arrow-right.png" style="float:left;"/>
                         <h2>Options:</h2>
-                        <!-- <div>
-                            <input type="checkbox" id="numbers" name="numbers" checked>
-                            <label for="lowercase-letters">With numbers</label>
-                        </div> -->
-
                         <label class="switch">
                             <input type="checkbox" id="numbers" checked>
                             <span class="slider round"></span>
                             <p>With numbers</p>
                         </label>
-
                         <div>
                             <input type="checkbox" id="lowercase-letters" name="lowercase-letters" checked>
                             <label for="lowercase-letters">With lowercase letters</label>
@@ -53,7 +48,7 @@
                     <article class="password-options">
                         <img src="../images/arrow-right.png" style="float:left;"/>
                         <h2>Characters length:</h2>
-                        <input type="number" id="length" name="length" min="1" max="1000" value="16">
+                        <input type="number" id="length" min="1" max="1000" value="16">
                     </article>
                     <article class="password-options">
                         <img src="../images/arrow-right.png" style="float:left;"/>
@@ -66,6 +61,5 @@
                 </div>
                 <button id="generatePasswordBtn">Generate Password</button> 
             </div>
-            
     </body>
 </html>
