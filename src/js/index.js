@@ -17,6 +17,16 @@ checkBoxCapitalLetters.checked = dataStart.checkboxes.capitalLetters;
 checkboxSpecialLetters.checked = dataStart.checkboxes.specialCharacters;
 passwordLength.value = dataStart.others.passwordLength;
 document.body.style.background = 'linear-gradient(to right,'+(dataStart.appColors.backgroundColor1)+','+(dataStart.appColors.backgroundColor2)+')';
+check();
+
+function check() {
+    var elements = document.querySelectorAll(".password-options");
+    let dt = fs.readFileSync("src/user-preferences.json");
+    let data = JSON.parse(dt);
+    for (var i = 0 ; i < elements.length ; i++) {
+        elements[i].style.background = 'linear-gradient(to right, '+(data.appColors.backgroundColor1b)+','+(data.appColors.backgroundColor2b)+')';
+    }
+}
 
 //============================== Generate Password Button ==============================
 
@@ -89,6 +99,28 @@ var message = document.getElementById("message");
 var messageFail = document.getElementById("messageFail");
 
 copyButton.addEventListener("click", () => {
+    if(password.value != ""){
+        if(password.style.color == "red"){
+            messageFail.style.display = "contents";
+            setTimeout(function() {
+            messageFail.style.display = "none";
+            }, 700);
+        } else {
+            navigator.clipboard.writeText(password.value);
+            message.style.display = "contents";
+            setTimeout(function() {
+            message.style.display = "none";
+            }, 700);
+        }
+    } else {
+        messageFail.style.display = "contents";
+        setTimeout(function() {
+        messageFail.style.display = "none";
+        }, 700);
+    }
+});
+
+password.addEventListener("click", () => {
     if(password.value != ""){
         if(password.style.color == "red"){
             messageFail.style.display = "contents";

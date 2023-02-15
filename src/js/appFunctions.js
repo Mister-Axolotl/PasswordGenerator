@@ -25,7 +25,7 @@ minimizeBtn.addEventListener('click', () =>{
 
 maxResBtn.addEventListener('click', () =>{
     ipc.send('maximizeRestoreApp');
-    // changeMaxResBtn();
+    changeMaxResBtn();
 });
 
 closeBtn.addEventListener('click', () =>{

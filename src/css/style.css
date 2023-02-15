@@ -18,7 +18,7 @@
 
 nav {
     width: 100vw;
-    height: 60px;
+    height: 61px;
     display: flex; /*Met les éléments sur la même ligne*/
     justify-content: space-between; /*Rajoute de l'espace entre les éléments*/
     align-items: center; /*Met au milieu de la barre*/
@@ -108,10 +108,6 @@ nav {
     border-radius: 5px;
 }
 
-.password-options {
-    background: linear-gradient(to right,#7296d1,#1dee85);
-}
-
 .password-options > h2, .password-options > p {
     margin: 0.2rem;
     font-size: 1.5rem;
@@ -169,35 +165,45 @@ textarea {
     transform: translateY(2px);
 }
 
-#color1, #color2{
+#color1, #color2, #color1b, #color2b{
     border-style: none;
     border-radius: 5px;
     background-color: transparent;
 
 }
 
-#color1:hover, #color2:hover {
+#color1:hover, #color2:hover, #color1b:hover, #color2b:hover {
     background-color: #d4d7d5;
 }
 
 #reset-color {
-    background-color: #4CAF50;
+    background-color: #ce3b3b;
     border: none;
     border-radius: 10px;
     color: white;
-    padding: 10px;
     font-size: 16px;
-    width: 100px;
-    margin-left: 25%;
+    width: 130px;
+    height: 40px;
+    margin-left: 30px;
 }
 
 #reset-color:hover {
-    background-color: #1dee85;
+    background-color: #ee241d;
     cursor: pointer;
 }
 #reset-color:active {
-    background-color: #20c372;
+    background-color: #c32020;
     box-shadow: 0 0px 10px #000000;
+}
+
+#reset-color > img {
+    width: 20px;
+    margin-right: 10px;
+    margin-top: 2px;
+}
+
+#textResetColor {
+    margin-bottom: 1px;
 }
 
 input[type="color"] {
