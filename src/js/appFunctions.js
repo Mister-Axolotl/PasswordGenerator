@@ -1,22 +1,37 @@
 const { ipcRenderer } = require('electron');
 const ipc = ipcRenderer;
 
-const minimizeBtn = document.getElementById("minimize-app");
-const maxResBtn = document.getElementById("maximize-app");
-const closeBtn = document.getElementById("close-app");
+var minimizeBtn = document.getElementById("minimize-app");
+var maxResBtn = document.getElementById("maximize-app");
+var closeBtn = document.getElementById("close-app");
+var maximizeImage = document.querySelector("#image-maximize");
 
-function changeMaxResBtn(){
-    let dt = fs.readFileSync("src/user-preferences.json");
-    let data = JSON.parse(dt);
-    if(data.windowBounds.isMaximized){
-        maxResBtn.title = 'Maximize';
-    } else {
-        maxResBtn.title = 'Minimize';
-    }
+function loadJSON(callback) {   
+    var json = new XMLHttpRequest();
+    json.overrideMimeType("application/json");
+    json.open('GET', '../user-preferences.json', true);
+    json.onreadystatechange = function () {
+      if (json.readyState == 4 && json.status == "200") {
+        callback(JSON.parse(json.responseText));
+      }
+    };
+    json.send(null);
 }
 
-ipc.on('isMaximized', () => { changeMaxResBtn(true) });
-ipc.on('isRestored', () => { changeMaxResBtn(false) });
+function changeMaxResBtn(){
+    loadJSON(function(data) {
+        if(data.windowBounds.isMaximized == true){
+            maxResBtn.title = 'Maximize';
+            maximizeImage.src = "../images/minimize.png";
+        } else {
+            maxResBtn.title = 'Minimize';
+            maximizeImage.src = "../images/resize.png";
+        }
+    });
+}
+
+ipc.on('isMaximized', () => { changeMaxResBtn(); });
+ipc.on('isRestored', () => { changeMaxResBtn(); });
 
 minimizeBtn.addEventListener('click', () =>{
     ipc.send('minimizeApp');

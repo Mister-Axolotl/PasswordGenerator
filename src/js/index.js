@@ -8,6 +8,7 @@ var checkBoxLowercaseLetters = document.querySelector("#lowercase-letters");
 var checkBoxCapitalLetters = document.querySelector("#capital-letters");
 var checkboxSpecialLetters = document.querySelector("#special-letters");
 var passwordLength = document.querySelector("#length");
+var maximizeImage = document.querySelector("#image-maximize");
 
 let dtStart = fs.readFileSync("src/user-preferences.json");
 let dataStart = JSON.parse(dtStart);
@@ -25,6 +26,11 @@ function check() {
     let data = JSON.parse(dt);
     for (var i = 0 ; i < elements.length ; i++) {
         elements[i].style.background = 'linear-gradient(to right, '+(data.appColors.backgroundColor1b)+','+(data.appColors.backgroundColor2b)+')';
+    }
+    if(data.windowBounds.isMaximized){
+        maximizeImage.src = "../images/minimize.png";
+    } else {
+        maximizeImage.src = "../images/resize.png";
     }
 }
 

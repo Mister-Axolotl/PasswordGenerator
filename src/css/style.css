@@ -27,6 +27,12 @@ nav {
     -webkit-app-region: drag;
 }
 
+#image-maximize {
+    background-repeat: no-repeat;
+    width: 20px;
+    height: 20px;
+}
+
 #logo {
     margin-left: 3mm;
     margin-top: 2mm;

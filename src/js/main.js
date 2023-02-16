@@ -20,41 +20,18 @@ function createWindow(user_width, user_height) {
         }
     });
 
+    function showMessage(message){
+        console.log("showMessage trapped");
+        console.log(message);
+        this.window.webContents.send("updateMessage", message);
+    }
+    
     mainWindow.loadFile('src/pages/index.html');
 
     // Minimize
     ipc.on('minimizeApp', () => {
         mainWindow.minimize();
     });
-
-    // // Maximize
-    // ipc.on('maximizeRestoreApp', () => {
-    //   let dt = fs.readFileSync("src/user-preferences.json");
-    //   let data = JSON.parse(dt);
-    //   if(mainWindow.isMaximized()){
-    //     data.windowBounds.isMaximized = false;
-    //     mainWindow.restore();
-    //   } else {
-    //     data.windowBounds.isMaximized = true;
-    //     mainWindow.maximize();
-    //   }
-    //   var json = JSON.stringify(data, null, 2);
-    //   fs.writeFile("src/user-preferences.json", json, "utf8", (err) => { if (err) console.log(err); });
-        
-    //   mainWindow.on('maximize', () => {
-    //     mainWindow.webContents.send('isMaximized')
-    //     if(mainWindow.isMaximized()){
-    //       data.windowBounds.isMaximized = false;
-    //       mainWindow.restore();
-    //     } else {
-    //       data.windowBounds.isMaximized = true;
-    //       mainWindow.maximize();
-    //     }
-    //   });
-    //   mainWindow.on('unmaximize', () => {
-    //     mainWindow.webContents.send('isRestored')
-    //   });
-    // });
 
     //Maximize
     ipc.on('maximizeRestoreApp', () => {
@@ -71,11 +48,26 @@ function createWindow(user_width, user_height) {
         fs.writeFile("src/user-preferences.json", json, "utf8", (err) => { if (err) console.log(err); });
     })
 
+    mainWindow.webContents.on('did-finish-load', () => {
+        // const buttonPath = path.join(__dirname, 'button.html');
+        // mainWindow.webContents.executeJavaScript(`fetch('${buttonPath}').then(response => response.text()).then(text => document.body.innerHTML += text);`);
+    });
+
     mainWindow.on('maximize', () => {
+        let dt = fs.readFileSync("src/user-preferences.json");
+        let data = JSON.parse(dt);
         mainWindow.webContents.send('isMaximized');
+        data.windowBounds.isMaximized = true;
+        var json = JSON.stringify(data, null, 2);
+        fs.writeFile("src/user-preferences.json", json, "utf8", (err) => { if (err) console.log(err); });
     })
     mainWindow.on('unmaximize', () => {
+        let dt = fs.readFileSync("src/user-preferences.json");
+        let data = JSON.parse(dt);
         mainWindow.webContents.send('isRestored');
+        data.windowBounds.isMaximized = false;
+        var json = JSON.stringify(data, null, 2);
+        fs.writeFile("src/user-preferences.json", json, "utf8", (err) => { if (err) console.log(err); });
     })
 
     // Close
@@ -85,22 +77,14 @@ function createWindow(user_width, user_height) {
 }
 
 app.whenReady().then(() => {
-    app.on("activate", function () {
-        if (BrowserWindow.getAllWindows().length == 0);
-        createWindow();
-    });
-
-    // Read the data
-    let res = fs.existsSync("src/user-preferences.json");
-    if(res) {
-        let dt = fs.readFileSync("src/user-preferences.json");
-        let data = JSON.parse(dt);
-        let width = data.windowBounds.width;
-        let height = data.windowBounds.height;
-        createWindow(width, height);
-        if(data.windowBounds.isMaximized){
-            mainWindow.maximize();
-        }
+    let dt = fs.readFileSync("src/user-preferences.json");
+    let data = JSON.parse(dt);
+    let width = data.windowBounds.width;
+    let height = data.windowBounds.height;
+    createWindow(width, height);
+   
+    if(data.windowBounds.isMaximized){
+        mainWindow.maximize();
     }
 
     // mainWindow.on('resize', () => {
@@ -113,7 +97,6 @@ app.whenReady().then(() => {
     //      fs.writeFile("src/user-preferences.json", json, "utf8", (err) => { if (err) console.log(err); });
     // })
 });
-
 
 app.on('mainWindowdow-all-closed', () => {
     if (process.platform !== 'darmainWindow') {

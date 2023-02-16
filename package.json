@@ -4,11 +4,31 @@
   "description": "",
   "main": "./src/js/main.js",
   "scripts": {
-    "start": "electron ."
+    "start": "electron .",
+    "dist": "electron-builder"
+  },
+  "repository": "https://github.com/Mister-Axolotl/PasswordGeneratorElectron",
+  "publish": {
+    "provider": "github",
+    "releaseType": "relase"
+  },
+  "build": {
+    "appId": "com.misteraxolotl.passwordgenerator",
+    "productName": "Password Generator",
+    "win": {
+      "target": "nsis"
+    },
+    "directories": {
+      "output": "dist"
+    }
   },
   "author": "",
   "license": "ISC",
   "devDependencies": {
-    "electron": "^22.0.3"
+    "electron": "^22.0.3",
+    "electron-builder": "^23.6.0"
+  },
+  "dependencies": {
+    "electron-updater": "^5.3.0"
   }
 }
