@@ -1,6 +1,7 @@
 // ============================== Variables ==============================
 
 const fs = require("fs");
+const { loadJSON } = require('../js/functions');
 var generatePasswordBtn = document.querySelector("#generatePasswordBtn");
 var password = document.querySelector("#password");
 var checkBoxNumbers = document.querySelector("#numbers");
@@ -9,32 +10,14 @@ var checkBoxCapitalLetters = document.querySelector("#capital-letters");
 var checkboxSpecialLetters = document.querySelector("#special-letters");
 var passwordLength = document.querySelector("#length");
 var maximizeImage = document.querySelector("#image-maximize");
+var elements = document.querySelectorAll(".password-options");
+var currentPage = "index";
 
-let dtStart = fs.readFileSync("src/user-preferences.json");
-let dataStart = JSON.parse(dtStart);
-checkBoxNumbers.checked = dataStart.checkboxes.numbers;
-checkBoxLowercaseLetters.checked = dataStart.checkboxes.lowercase;
-checkBoxCapitalLetters.checked = dataStart.checkboxes.capitalLetters;
-checkboxSpecialLetters.checked = dataStart.checkboxes.specialCharacters;
-passwordLength.value = dataStart.others.passwordLength;
-document.body.style.background = 'linear-gradient(to right,'+(dataStart.appColors.backgroundColor1)+','+(dataStart.appColors.backgroundColor2)+')';
-check();
+// ============================== Load all parameters ==============================
 
-function check() {
-    var elements = document.querySelectorAll(".password-options");
-    let dt = fs.readFileSync("src/user-preferences.json");
-    let data = JSON.parse(dt);
-    for (var i = 0 ; i < elements.length ; i++) {
-        elements[i].style.background = 'linear-gradient(to right, '+(data.appColors.backgroundColor1b)+','+(data.appColors.backgroundColor2b)+')';
-    }
-    if(data.windowBounds.isMaximized){
-        maximizeImage.src = "../images/minimize.png";
-    } else {
-        maximizeImage.src = "../images/resize.png";
-    }
-}
+restorePage(maximizeImage, elements, currentPage, null);
 
-//============================== Generate Password Button ==============================
+// ============================== Generate Password Button ==============================
 
 function generatePassword(length) {
 	var result = []; 
@@ -55,18 +38,25 @@ function generatePassword(length) {
             characters.push('!','@','#','$','%','^','&','*','(',')','_','+')
         }
         for ( var i = 0; i < length; i++ ) { 
-            result.push(characters.at(Math.floor(Math.random() * characters.length))); 
+            result.push(characters.at(Math.floor(Math.random() * characters.length)));
         }
         if(checkBoxNumbers.checked === false && checkBoxLowercaseLetters.checked === false && checkBoxCapitalLetters.checked === false && checkboxSpecialLetters.checked === false){
             password.style.color = "red";
             return password.value = 'You must check something!';
         } else {
-            let dt = fs.readFileSync("src/user-preferences.json");
-            let data = JSON.parse(dt);
-            data.others.passwordGenerated = data.others.passwordGenerated + 1;
-            var json = JSON.stringify(data, null, 2);
-            fs.writeFile("src/user-preferences.json", json, "utf8", (err) => { if (err) console.log(err); });
-            return password.value = result.join('');
+            loadJSON(function(data) {
+                data.others.passwordGenerated = data.others.passwordGenerated + 1;
+                var json = JSON.stringify(data, null, 2);
+                fs.writeFile("src/user-preferences.json", json, "utf8", (err) => { if (err) console.log(err); });
+                if(data.checkboxes.autoCopy === true){
+                    message.style.display = "contents";
+                    setTimeout(function() {
+                        message.style.display = "none";
+                        navigator.clipboard.writeText(password.value);
+                    }, 700);
+                }
+                return password.value = result.join('');
+            })
         }
     } else if(passwordLength.value > 1000) {
         password.style.color = "red";
@@ -109,19 +99,19 @@ copyButton.addEventListener("click", () => {
         if(password.style.color == "red"){
             messageFail.style.display = "contents";
             setTimeout(function() {
-            messageFail.style.display = "none";
+                messageFail.style.display = "none";
             }, 700);
         } else {
             navigator.clipboard.writeText(password.value);
             message.style.display = "contents";
             setTimeout(function() {
-            message.style.display = "none";
+                message.style.display = "none";
             }, 700);
         }
     } else {
         messageFail.style.display = "contents";
         setTimeout(function() {
-        messageFail.style.display = "none";
+            messageFail.style.display = "none";
         }, 700);
     }
 });
@@ -131,19 +121,19 @@ password.addEventListener("click", () => {
         if(password.style.color == "red"){
             messageFail.style.display = "contents";
             setTimeout(function() {
-            messageFail.style.display = "none";
+                messageFail.style.display = "none";
             }, 700);
         } else {
             navigator.clipboard.writeText(password.value);
             message.style.display = "contents";
             setTimeout(function() {
-            message.style.display = "none";
+                message.style.display = "none";
             }, 700);
         }
     } else {
         messageFail.style.display = "contents";
         setTimeout(function() {
-        messageFail.style.display = "none";
+            messageFail.style.display = "none";
         }, 700);
     }
 });

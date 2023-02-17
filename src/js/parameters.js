@@ -1,51 +1,51 @@
+// ============================== Variables ==============================
+
 const fs = require("fs");
-let dtStart = fs.readFileSync("src/user-preferences.json");
-let dataStart = JSON.parse(dtStart);
+const { loadJSON } = require('../js/functions');
 let timeoutId = null;
+var colorPage1 = document.querySelector("#color1");
+var colorPage2 = document.querySelector("#color2");
+var colorPage1b = document.querySelector("#color1b");
+var colorPage2b = document.querySelector("#color2b");
+var resetColorPageButton = document.querySelector(".reset-color-page");
+var resetColorBackgroundButton = document.querySelector(".reset-color-background");
+var checkboxAutoCopy = document.querySelector("#auto-copy");
+var elements = document.querySelectorAll(".password-options");
+var passwordGenerated = document.querySelector("#passwordGenerated");
+var maximizeImage = document.querySelector("#image-maximize");
+var currentPage = "parameters";
+
+// ============================== Load all parameters ==============================
+
+restorePage(maximizeImage, elements, currentPage, passwordGenerated);
 
 // ============================== Save page colors into user-preferences ==============================
 
-var color1 = document.querySelector("#color1");
-var color2 = document.querySelector("#color2");
-var color1b = document.querySelector("#color1b");
-var color2b = document.querySelector("#color2b");
-var passwordGenerated = document.querySelector("#passwordGenerated");
-var maximizeImage = document.querySelector("#image-maximize");
-
-color1.value = dataStart.appColors.backgroundColor1;
-color2.value = dataStart.appColors.backgroundColor2;
-color1b.value = dataStart.appColors.backgroundColor1b;
-color2b.value = dataStart.appColors.backgroundColor2b;
-passwordGenerated.innerHTML = ": " + dataStart.others.passwordGenerated;
-
-document.body.style.background = 'linear-gradient(to right, '+(dataStart.appColors.backgroundColor1)+', '+(dataStart.appColors.backgroundColor2)+')';
-check();
-
-color1.addEventListener("input", () => {
+colorPage1.addEventListener("input", () => {
     let dt = fs.readFileSync("src/user-preferences.json");
     let data = JSON.parse(dt);
-    document.body.style.background = 'linear-gradient(to right,'+(color1.value)+','+(data.appColors.backgroundColor2)+')';
+    document.body.style.background = 'linear-gradient(to right,'+(colorPage1.value)+','+(data.appColors.backgroundColor2)+')';
     if(timeoutId) {
         clearTimeout(timeoutId);
     }
     
     timeoutId = setTimeout(function() {
-        data.appColors.backgroundColor1 = color1.value;
+        data.appColors.backgroundColor1 = colorPage1.value;
         var json = JSON.stringify(data, null, 2);
         fs.writeFile("src/user-preferences.json", json, "utf8", (err) => { if (err) console.log(err); });
     }, 100);
 });
 
-color2.addEventListener("input", () => {
+colorPage2.addEventListener("input", () => {
     let dt = fs.readFileSync("src/user-preferences.json");
     let data = JSON.parse(dt);
-    document.body.style.background = 'linear-gradient(to right,'+(data.appColors.backgroundColor1)+','+(color2.value)+')';
+    document.body.style.background = 'linear-gradient(to right,'+(data.appColors.backgroundColor1)+','+(colorPage2.value)+')';
     if(timeoutId) {
         clearTimeout(timeoutId);
     }
     
     timeoutId = setTimeout(function() {
-        data.appColors.backgroundColor2 = color2.value;
+        data.appColors.backgroundColor2 = colorPage2.value;
         var json = JSON.stringify(data, null, 2);
         fs.writeFile("src/user-preferences.json", json, "utf8", (err) => { if (err) console.log(err); });
     }, 100);
@@ -53,16 +53,14 @@ color2.addEventListener("input", () => {
 
 // ============================== Reset color page ==============================
 
-var resetColorButton = document.querySelector(".reset-color-page");
-
-resetColorButton.addEventListener("click", () => {
+resetColorPageButton.addEventListener("click", () => {
     let dt = fs.readFileSync("src/user-preferences.json");
     let data = JSON.parse(dt);
     document.body.style.background = 'linear-gradient(to right, #393E46, #171b21)';
     data.appColors.backgroundColor1 = "#393E46";
     data.appColors.backgroundColor2 = "#171b21";
-    color1.value = "#393E46";
-    color2.value = "#171b21";
+    colorPage1.value = "#393E46";
+    colorPage2.value = "#171b21";
     var json = JSON.stringify(data, null, 2);
     fs.writeFile("src/user-preferences.json", json, "utf8", (err) => { if (err) console.log(err); });
 });
@@ -74,7 +72,7 @@ function check() {
     let dt = fs.readFileSync("src/user-preferences.json");
     let data = JSON.parse(dt);
     for (var i = 0 ; i < elements.length ; i++) {
-        elements[i].style.background = 'linear-gradient(to right,'+(color1b.value)+','+(color2b.value)+')';
+        elements[i].style.background = 'linear-gradient(to right,'+(colorPage1b.value)+','+(colorPage2b.value)+')';
     }
     if(data.windowBounds.isMaximized){
         maximizeImage.src = "../images/minimize.png";
@@ -83,7 +81,7 @@ function check() {
     }
 }
 
-color1b.addEventListener("input", () => {
+colorPage1b.addEventListener("input", () => {
     let dt = fs.readFileSync("src/user-preferences.json");
     let data = JSON.parse(dt);
     check();
@@ -92,13 +90,13 @@ color1b.addEventListener("input", () => {
     }
     
     timeoutId = setTimeout(function() {
-        data.appColors.backgroundColor1b = color1b.value;
+        data.appColors.backgroundColor1b = colorPage1b.value;
         var json = JSON.stringify(data, null, 2);
         fs.writeFile("src/user-preferences.json", json, "utf8", (err) => { if (err) console.log(err); });
     }, 100);
 });
 
-color2b.addEventListener("input", () => {
+colorPage2b.addEventListener("input", () => {
     let dt = fs.readFileSync("src/user-preferences.json");
     let data = JSON.parse(dt);
     check();
@@ -107,7 +105,7 @@ color2b.addEventListener("input", () => {
     }
     
     timeoutId = setTimeout(function() {
-        data.appColors.backgroundColor2b = color2b.value;
+        data.appColors.backgroundColor2b = colorPage2b.value;
         var json = JSON.stringify(data, null, 2);
         fs.writeFile("src/user-preferences.json", json, "utf8", (err) => { if (err) console.log(err); });
     }, 100);
@@ -115,9 +113,7 @@ color2b.addEventListener("input", () => {
 
 // ============================== Reset color background ==============================
 
-var resetColorButton = document.querySelector(".reset-color-background");
-
-resetColorButton.addEventListener("click", () => {
+resetColorBackgroundButton.addEventListener("click", () => {
     let dt = fs.readFileSync("src/user-preferences.json");
     let data = JSON.parse(dt);
     var elements = document.querySelectorAll(".password-options");
@@ -126,8 +122,17 @@ resetColorButton.addEventListener("click", () => {
     }
     data.appColors.backgroundColor1b = "#6fa5fb";
     data.appColors.backgroundColor2b = "#3e1bee";
-    color1b.value = "#6fa5fb";
-    color2b.value = "#3e1bee";
+    colorPage1b.value = "#6fa5fb";
+    colorPage2b.value = "#3e1bee";
     var json = JSON.stringify(data, null, 2);
     fs.writeFile("src/user-preferences.json", json, "utf8", (err) => { if (err) console.log(err); });
+});
+
+checkboxAutoCopy.addEventListener("click", () => {
+    loadJSON(function(data) {
+        if(checkboxAutoCopy.checked) data.checkboxes.autoCopy = true;
+        else data.checkboxes.autoCopy = false;
+        var json = JSON.stringify(data, null, 2);
+        fs.writeFile("src/user-preferences.json", json, "utf8", (err) => { if (err) console.log(err); });
+    })
 });

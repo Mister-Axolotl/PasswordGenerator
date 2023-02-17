@@ -16,16 +16,10 @@ function createWindow(user_width, user_height) {
             nodeIntegration: true,
             contextIsolation: false,
             devTools: true,
-            preload: path.join(__dirname, 'preload.js')
+            preload: path.join(__dirname, 'preload.js'),
         }
     });
 
-    function showMessage(message){
-        console.log("showMessage trapped");
-        console.log(message);
-        this.window.webContents.send("updateMessage", message);
-    }
-    
     mainWindow.loadFile('src/pages/index.html');
 
     // Minimize
@@ -46,11 +40,6 @@ function createWindow(user_width, user_height) {
         }
         var json = JSON.stringify(data, null, 2);
         fs.writeFile("src/user-preferences.json", json, "utf8", (err) => { if (err) console.log(err); });
-    })
-
-    mainWindow.webContents.on('did-finish-load', () => {
-        // const buttonPath = path.join(__dirname, 'button.html');
-        // mainWindow.webContents.executeJavaScript(`fetch('${buttonPath}').then(response => response.text()).then(text => document.body.innerHTML += text);`);
     });
 
     mainWindow.on('maximize', () => {
@@ -60,7 +49,8 @@ function createWindow(user_width, user_height) {
         data.windowBounds.isMaximized = true;
         var json = JSON.stringify(data, null, 2);
         fs.writeFile("src/user-preferences.json", json, "utf8", (err) => { if (err) console.log(err); });
-    })
+    });
+    
     mainWindow.on('unmaximize', () => {
         let dt = fs.readFileSync("src/user-preferences.json");
         let data = JSON.parse(dt);
@@ -68,7 +58,7 @@ function createWindow(user_width, user_height) {
         data.windowBounds.isMaximized = false;
         var json = JSON.stringify(data, null, 2);
         fs.writeFile("src/user-preferences.json", json, "utf8", (err) => { if (err) console.log(err); });
-    })
+    });
 
     // Close
     ipc.on('closeApp', () => {
