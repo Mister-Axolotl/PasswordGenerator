@@ -16,7 +16,8 @@
     "appId": "com.misteraxolotl.passwordgenerator",
     "productName": "Password Generator",
     "win": {
-      "target": "nsis"
+      "target": "nsis",
+      "icon": "./src/images/password.png"
     },
     "directories": {
       "output": "dist"

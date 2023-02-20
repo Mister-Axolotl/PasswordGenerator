@@ -7,6 +7,7 @@
 body{
     opacity: 0;
     background-color: #000000;
+    transition: opacity 0.5s;
 }
 
 .main-app {
@@ -32,10 +33,21 @@ nav {
     -webkit-app-region: drag;
 }
 
-#image-maximize {
+#minimize-app > img, #maximize-app > img, #close-app > img {
     background-repeat: no-repeat;
     width: 20px;
     height: 20px;
+    position: relative;
+    top: 4px;
+}
+
+.switch-label > img {
+    background-repeat: no-repeat;
+    width: 40px;
+    height: 40px;
+    position: relative;
+    margin-left: 8px;
+    top: -8px;
 }
 
 #logo {
@@ -112,19 +124,19 @@ nav {
 /* Articles */
 
 .mainPage > h1,
-.password-options {
+.article {
     margin: 0.5rem;
     padding: 0.3rem;
     font-size: 1.2rem;
     border-radius: 5px;
 }
 
-.password-options > h2, .password-options > p {
+.article > h2, .article > p {
     margin: 0.2rem;
     font-size: 1.5rem;
 }
 
-.password-options > img {
+.article > img {
     background-repeat: no-repeat;
     width: 20px;
     padding-top: 11px;
@@ -178,13 +190,13 @@ textarea {
 
 #color1, #color2, #color1b, #color2b{
     border-style: none;
-    border-radius: 5px;
+    border-radius: 0px;
     background-color: transparent;
-
 }
 
 #color1:hover, #color2:hover, #color1b:hover, #color2b:hover {
     background-color: #d4d7d5;
+
 }
 
 #reset-color {
@@ -219,11 +231,8 @@ textarea {
 
 input[type="color"] {
     appearance: none;
-    -moz-appearance: none;
-    -webkit-appearance: none;
-    background: none;
-    border: 0;
     cursor: pointer;
+    border-radius: 5px;
     height: 50px;
     padding: 0;
     width: 50px;
@@ -242,3 +251,4 @@ input[type="color"] {
     margin-top: 10px;
     margin-right: 10px;
 }
+

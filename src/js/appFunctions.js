@@ -1,14 +1,30 @@
 const { ipcRenderer } = require('electron');
 const ipc = ipcRenderer;
-const { restorePage } = require('../js/functions');
+const { maximizeButton, writeJSON } = require('../js/functions.js');
 
 var minimizeBtn = document.getElementById("minimize-app");
 var maxResBtn = document.getElementById("maximize-app");
 var closeBtn = document.getElementById("close-app");
 var maximizeImage = document.querySelector("#image-maximize");
 
-ipc.on('isMaximized', () => { restorePage(maximizeImage, null, null, null); });
-ipc.on('isRestored', () => { restorePage(maximizeImage, null, null, null); });
+ipc.on('isMaximized', () => { maximizeButton(maxResBtn, maximizeImage) });
+
+ipc.on('isRestored', () => { maximizeButton(maxResBtn, maximizeImage) });
+
+ipc.on('maxTrue', () => {
+    loadJSON(function(data) { 
+        data.windowBounds.isMaximized = false;
+        writeJSON(data);
+    });
+});
+
+ipc.on('maxFalse', () => {
+    loadJSON(function(data) { 
+        data.windowBounds.isMaximized = true;
+        writeJSON(data);
+    });
+});
+
 
 minimizeBtn.addEventListener('click', () =>{
     ipc.send('minimizeApp');
