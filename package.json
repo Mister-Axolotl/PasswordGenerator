@@ -1,33 +1,20 @@
 {
-  "name": "passwordgenerator",
+  "name": "password-generator",
   "version": "1.0.0",
-  "description": "",
+  "description": "An application for create password",
   "main": "./src/js/main.js",
   "scripts": {
-    "start": "electron .",
-    "dist": "electron-builder"
+    "start": "electron ."
   },
   "repository": "https://github.com/Mister-Axolotl/PasswordGeneratorElectron",
   "publish": {
     "provider": "github",
     "releaseType": "relase"
   },
-  "build": {
-    "appId": "com.misteraxolotl.passwordgenerator",
-    "productName": "Password Generator",
-    "win": {
-      "target": "nsis",
-      "icon": "./src/images/password.png"
-    },
-    "directories": {
-      "output": "dist"
-    }
-  },
-  "author": "",
+  "author": "MisterAxolotl",
   "license": "ISC",
   "devDependencies": {
-    "electron": "^22.0.3",
-    "electron-builder": "^23.6.0"
+    "electron": "^22.0.3"
   },
   "dependencies": {
     "electron-updater": "^5.3.0"

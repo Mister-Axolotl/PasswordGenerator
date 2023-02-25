@@ -1,24 +1,12 @@
 const fs = require("fs");
 
 function loadJSON(callback) {
-    var json = new XMLHttpRequest();
-    json.overrideMimeType("application/json");
-    json.open('GET', '../user-preferences.json', true);
-    json.onreadystatechange = function () {
-        if (json.readyState == 4) {
-            if (json.status == 200) {
-                try {
-                    const data = JSON.parse(json.responseText);
-                    callback(data);
-                } catch (e) {
-                    console.error('Error parsing JSON data:', e);
-                }
-            } else {
-                console.error('Error loading JSON data: ' + json.status);
-            }
+    fs.readFile("src/user-preferences.json", "utf8", function readFileCallback(err, data) {
+        if (err) { console.log(err); } else {
+            var obj = JSON.parse(data);
+            callback(obj);
         }
-    };
-    json.send(null);
+    });
 };
 
 function writeJSON(data) {

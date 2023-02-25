@@ -2,7 +2,7 @@
 <html lang="en">
     <head>
         <meta charset="UTF-8">
-        <title>PasswordGenerator</title>
+        <title>Password Generator</title>
         <link rel="stylesheet" href="../css/style.css">
         <link rel="stylesheet" href="../css/switch.css">
         <script defer src="../js/appFunctions.js"></script>
@@ -59,7 +59,7 @@
                     <article class="article">
                         <img src="../images/arrow-right.png" style="float:left;"/>
                         <h2>Password length:</h2>
-                        <input type="number" id="length" min="1" max="1000" value="16">
+                        <input type="number" id="length" min="1" max="1000" value="16" required>
                     </article>
                     <article class="article">
                         <img src="../images/arrow-right.png" style="float:left;"/>
@@ -70,7 +70,8 @@
                         <p id="messageFail" style="display: none;">Nothing to copy</p>
                     </article>
                 </div>
-                <button id="generatePasswordBtn" title="Generate password">Generate Password</button> 
+                <!-- <button id="generatePasswordBtn" title="Generate password" autofocus>Generate Password</button>  -->
+                <input type="submit" id="generatePasswordBtn" title="Generate password" value="Generate password">
             </div>
             
             <div id="pageParameters">
@@ -82,13 +83,13 @@
                             <label for="head" id="textColor">Page gradient:</label>
                             <input type="color" id="color1" name="head">
                             <input type="color" id="color2" name="head">
-                            <button id="reset-color" title="Reset page colors" class="reset-color-page"><img src="../images/reset.png" style="float:right;"/><p id="textResetColor">Reset colors</p></button>
+                            <button id="reset" title="Reset page colors" class="reset-color-page"><img src="../images/reset.png" style="float:right;"/><p id="textResetColor">Reset colors</p></button>
                         </div>
                         <div id="colors">
                             <label for="head" id="textColor">Backgroud gradient:</label>
                             <input type="color" id="color1b" name="head">
                             <input type="color" id="color2b" name="head">
-                            <button id="reset-color" title="Reset background colors" class="reset-color-background"><img src="../images/reset.png" style="float:right;"/><p id="textResetColor">Reset colors</p></button>
+                            <button id="reset" title="Reset background colors" class="reset-color-background"><img src="../images/reset.png" style="float:right;"/><p id="textResetColor">Reset colors</p></button>
                         </div>
                     </article>
                     <article class="article">
@@ -101,6 +102,7 @@
                             </label>
                             <span class="switch-label">Automatically copy the password when it is generated</span>
                         </div>
+                        <button id="reset-app-preferences" title="Set all buttons and preferences to default"><img src="../images/reset.png" style="float:right;"/><p id="textResetColor">Reset all app preferences</p></button>
                     </article>
                     <article class="article">
                         <img src="../images/arrow-right.png" style="float:left;"/>

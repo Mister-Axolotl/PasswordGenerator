@@ -8,17 +8,17 @@
     "numbers": true,
     "lowercase": true,
     "capitalLetters": true,
-    "specialCharacters": false,
+    "specialCharacters": true,
     "autoCopy": false
   },
   "others": {
     "passwordLength": "16",
-    "passwordGenerated": 380
+    "passwordGenerated": 596
   },
   "appColors": {
     "backgroundColor1": "#393E46",
     "backgroundColor2": "#171b21",
-    "backgroundColor1b": "#7501e9",
+    "backgroundColor1b": "#6fa5fb",
     "backgroundColor2b": "#3e1bee"
   }
 }

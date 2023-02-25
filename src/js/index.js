@@ -19,6 +19,7 @@ var colorPage1b = document.querySelector("#color1b");
 var colorPage2b = document.querySelector("#color2b");
 var resetColorPageButton = document.querySelector(".reset-color-page");
 var resetColorBackgroundButton = document.querySelector(".reset-color-background");
+var resetAppPreferencesButton = document.querySelector("#reset-app-preferences");
 var checkboxAutoCopy = document.querySelector("#auto-copy");
 var elements = document.querySelectorAll(".article");
 var passwordGenerated = document.querySelector("#passwordGenerated");
@@ -248,14 +249,18 @@ colorPage2.addEventListener("input", () => {
 
 // ============================== Reset color page ==============================
 
+function resetColorPage(data){
+    document.body.style.background = 'linear-gradient(to right, #393E46, #171b21)';
+    data.appColors.backgroundColor1 = "#393E46";
+    data.appColors.backgroundColor2 = "#171b21";
+    colorPage1.value = "#393E46";
+    colorPage2.value = "#171b21";
+    writeJSON(data);
+}
+
 resetColorPageButton.addEventListener("click", () => {
     loadJSON(function(data) {
-        document.body.style.background = 'linear-gradient(to right, #393E46, #171b21)';
-        data.appColors.backgroundColor1 = "#393E46";
-        data.appColors.backgroundColor2 = "#171b21";
-        colorPage1.value = "#393E46";
-        colorPage2.value = "#171b21";
-        writeJSON(data);
+        resetColorPage(data);
     });
 });
 
@@ -299,18 +304,22 @@ colorPage2b.addEventListener("input", () => {
 
 // ============================== Reset color background ==============================
 
+function resetColorBackground(data){
+    var elements = document.querySelectorAll(".article");
+    for (var i = 0 ; i < elements.length ; i++) {
+        elements[i].style.background = 'linear-gradient(to right, #6fa5fb, #3e1bee)';
+    }
+    data.appColors.backgroundColor1b = "#6fa5fb";
+    data.appColors.backgroundColor2b = "#3e1bee";
+    colorPage1b.value = "#6fa5fb";
+    colorPage2b.value = "#3e1bee";
+    writeJSON(data);
+};
+
 resetColorBackgroundButton.addEventListener("click", () => {
     loadJSON(function(data) {
-        var elements = document.querySelectorAll(".article");
-        for (var i = 0 ; i < elements.length ; i++) {
-            elements[i].style.background = 'linear-gradient(to right, #6fa5fb, #3e1bee)';
-        }
-        data.appColors.backgroundColor1b = "#6fa5fb";
-        data.appColors.backgroundColor2b = "#3e1bee";
-        colorPage1b.value = "#6fa5fb";
-        colorPage2b.value = "#3e1bee";
-        writeJSON(data);
-    })
+        resetColorBackground(data);
+    });
 });
 
 // ============================== Auto Copy ==============================
@@ -319,6 +328,23 @@ checkboxAutoCopy.addEventListener("click", () => {
     loadJSON(function(data) {
         if(checkboxAutoCopy.checked) data.checkboxes.autoCopy = true;
         else data.checkboxes.autoCopy = false;
+        writeJSON(data);
+    });
+});
+
+// ============================== Reset all app preferences ==============================
+
+resetAppPreferencesButton.addEventListener("click", () => {
+    loadJSON(function(data) {
+        resetColorPage(data);
+        resetColorBackground(data);
+        checkboxAutoCopy.checked = false; 
+        data.checkboxes.autoCopy = false;
+        data.checkboxes.numbers = true;
+        data.checkboxes.lowercase = true;
+        data.checkboxes.capitalLetters = true;
+        data.checkboxes.specialCharacters = true;
+        passwordLength.value = "16"; data.others.passwordLength = "16";
         writeJSON(data);
     });
 });

@@ -13,14 +13,14 @@ ipc.on('isRestored', () => { maximizeButton(maxResBtn, maximizeImage) });
 
 ipc.on('maxTrue', () => {
     loadJSON(function(data) { 
-        data.windowBounds.isMaximized = false;
+        data.app.windowBounds.isMaximized = false;
         writeJSON(data);
     });
 });
 
 ipc.on('maxFalse', () => {
     loadJSON(function(data) { 
-        data.windowBounds.isMaximized = true;
+        data.app.windowBounds.isMaximized = true;
         writeJSON(data);
     });
 });
