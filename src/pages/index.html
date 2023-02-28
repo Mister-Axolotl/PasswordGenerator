@@ -2,7 +2,7 @@
 <html lang="en">
     <head>
         <meta charset="UTF-8">
-        <title>PasswordGenerator</title>
+        <title>Password Generator</title>
         <link rel="stylesheet" href="../css/style.css">
         <link rel="stylesheet" href="../css/switch.css">
         <script defer src="../js/appFunctions.js"></script>
@@ -16,50 +16,103 @@
                     <div class="title">Password Generator</div>
                 </div>
                 <div class="right-nav">
-                    <a href="./parameters.html"><span class="nav-link" id="parameters-page" title="Parameters">Options</span></span></a>
-                    <span class="nav-link" id="minimize-app" title="Minimize">&minus;</span>
-                    <span class="nav-link" id="maximize-app" title="Maximize">🗖</span>
-                    <span class="nav-link" id="close-app" title="Close">&#10006;</span>
+                    <span class="nav-link" id="parameters-page" title="Parameters">Parameters</span>
+                    <span class="nav-link" id="minimize-app" title="Minimize"><img src="../images/minus.png" id="image-minimize"></span>
+                    <span class="nav-link" id="maximize-app" title="Maximize"><img src="../images/resize.png" id="image-maximize"></span>
+                    <span class="nav-link" id="close-app" title="Close"><img src="../images/close.png" id="image-close"></span>
                 </div>
             </nav>
-            <div class="mainPage">
+            <div id="pageIndex">
                 <div class="container">
-                    <article class="password-options">
+                    <article class="article">
                         <img src="../images/arrow-right.png" style="float:left;"/>
                         <h2>Options:</h2>
-                        <label class="switch">
-                            <input type="checkbox" id="numbers" checked>
-                            <span class="slider round"></span>
-                            <p>With numbers</p>
-                        </label>
-                        <div>
-                            <input type="checkbox" id="lowercase-letters" name="lowercase-letters" checked>
-                            <label for="lowercase-letters">With lowercase letters</label>
+                        <div class="switch-inner">
+                            <label class="switch switch-default">
+                                <input class="switch-input" type="checkbox" id="numbers" name="numbers" checked>
+                                <span class="slider round"></span>
+                            </label>
+                            <span class="switch-label">With numbers<img src="../images/numbers.png" style="float:right;"/></span>
                         </div>
-                        <div>
-                            <input type="checkbox" id="capital-letters" name="capital-letters" checked>
-                            <label for="capital-letters">With capital letters</label>
+                        <div class="switch-inner">
+                            <label class="switch switch-default">
+                                <input class="switch-input" type="checkbox" id="lowercase-letters" name="lowercase-letters" checked>
+                                <span class="slider round"></span>
+                            </label>
+                            <span class="switch-label">With lowercase letters<img src="../images/lowercase.png" style="float:right;"/></span>
                         </div>
-                        <div>
-                            <input type="checkbox" id="special-letters" name="special-letters" checked>
-                            <label for="special-letters">With special characters</label>
+                        <div class="switch-inner">
+                            <label class="switch switch-default">
+                                <input class="switch-input" type="checkbox" id="capital-letters" name="capital-letters" checked>
+                                <span class="slider round"></span>
+                            </label>
+                            <span class="switch-label">With capital letters<img src="../images/capital-letters.png" style="float:right;"/></span>
+                        </div>
+                        <div class="switch-inner">
+                            <label class="switch switch-default">
+                                <input class="switch-input" type="checkbox" id="special-letters" name="special-letters" checked>
+                                <span class="slider round"></span>
+                            </label>
+                            <span class="switch-label">With special characters<img src="../images/special-characters.png" style="float:right;"/></span>
                         </div>
                     </article>
-                    <article class="password-options">
+                    <article class="article">
                         <img src="../images/arrow-right.png" style="float:left;"/>
-                        <h2>Characters length:</h2>
-                        <input type="number" id="length" min="1" max="1000" value="16">
+                        <h2>Password length:</h2>
+                        <input type="number" id="length" min="1" max="1000" value="16" required>
                     </article>
-                    <article class="password-options">
+                    <article class="article">
                         <img src="../images/arrow-right.png" style="float:left;"/>
                         <h2>Your password:</h2>
                         <input type="text" id="password" name="password" readonly>
-                        <button id="copy"><img src="../images/copy-two-paper-sheets-interface-symbol.png" style="float:right;"/>Copy</button>
+                        <button id="copy" title="Copy password"><img src="../images/copy-two-paper-sheets-interface-symbol.png" style="float:right;"/>Copy</button>
                         <p id="message" style="display: none;">Password copied!</p>
                         <p id="messageFail" style="display: none;">Nothing to copy</p>
                     </article>
                 </div>
-                <button id="generatePasswordBtn">Generate Password</button> 
+                <!-- <button id="generatePasswordBtn" title="Generate password" autofocus>Generate Password</button>  -->
+                <input type="submit" id="generatePasswordBtn" title="Generate password" value="Generate password">
+            </div>
+            
+            <div id="pageParameters">
+                <div class="container">
+                    <article class="article">
+                        <img src="../images/arrow-right.png" style="float:left;"/>
+                        <h2>App colors:</h2>
+                        <div id="colors">
+                            <label for="head" id="textColor">Page gradient:</label>
+                            <input type="color" id="color1" name="head">
+                            <input type="color" id="color2" name="head">
+                            <button id="reset" title="Reset page colors" class="reset-color-page"><img src="../images/reset.png" style="float:right;"/><p id="textResetColor">Reset colors</p></button>
+                        </div>
+                        <div id="colors">
+                            <label for="head" id="textColor">Backgroud gradient:</label>
+                            <input type="color" id="color1b" name="head">
+                            <input type="color" id="color2b" name="head">
+                            <button id="reset" title="Reset background colors" class="reset-color-background"><img src="../images/reset.png" style="float:right;"/><p id="textResetColor">Reset colors</p></button>
+                        </div>
+                    </article>
+                    <article class="article">
+                        <img src="../images/arrow-right.png" style="float:left;"/>
+                        <h2>App parameters:</h2>
+                        <div class="switch-inner">
+                            <label class="switch switch-default">
+                                <input class="switch-input" type="checkbox" id="auto-copy" name="auto-copy" unchecked>
+                                <span class="slider round"></span>
+                            </label>
+                            <span class="switch-label">Automatically copy the password when it is generated</span>
+                        </div>
+                        <button id="reset-app-preferences" title="Set all buttons and preferences to default"><img src="../images/reset.png" style="float:right;"/><p id="textResetColor">Reset all app preferences</p></button>
+                    </article>
+                    <article class="article">
+                        <img src="../images/arrow-right.png" style="float:left;"/>
+                        <h2>Stats:</h2>
+                        <div id="colors">
+                            <label for="head">Password generated</label>
+                            <label for="head" id="passwordGenerated"></label>
+                        </div>
+                    </article>
+                </div>
             </div>
     </body>
 </html>
